@@ -17,8 +17,8 @@ CREATE TABLE Matches(
 	AwayTeamId INT NOT NULL,
 	Date DATE DEFAULT CURRENT_DATE,
 	Time TIME DEFAULT CURRENT_TIME,
-	HomeScore INT DEFAULT 0,
-	AwayScore INT DEFAULT 0,
+	HomeScore INT DEFAULT 0 CHECK (HomeScore >= 0),
+	AwayScore INT DEFAULT 0 CHECK (AwayScore >= 0),
 	Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	Updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -46,7 +46,7 @@ CREATE TABLE Referees(
 );
 
 
-CREATE TABLE MatchType(
+CREATE TABLE MatchTypes(
 	MatchTypeId SERIAL PRIMARY KEY,
 	MatchTypeName VARCHAR(100) NOT NULL,
 	Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -76,5 +76,49 @@ CREATE TABLE Players(
 	Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	Updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- dodavanje FK
+ALTER TABLE Matches
+	ADD CONSTRAINT FkMatchesMatchType
+	FOREIGN KEY (MatchTypeId) REFERENCES MatchTypes(MatchTypeId),
+	ADD CONSTRAINT FkMatchesRefereeId 
+	FOREIGN KEY (RefereeId) REFERENCES Referees(RefereeId),
+	ADD CONSTRAINT FkMatchesTournamentId
+	FOREIGN KEY (TournamentId) REFERENCES Tournaments(TournamentId),
+	ADD CONSTRAINT FkMatchesHomeTeam
+	FOREIGN KEY (HomeTeamId) REFERENCES Teams(TeamId),
+	ADD CONSTRAINT FkMatchesAwayTeam
+	FOREIGN KEY (AwayTeamId) REFERENCES Teams(TeamId);
+
+ALTER TABLE Events
+	ADD CONSTRAINT FkEventsPlayer
+	FOREIGN KEY (PlayerId) REFERENCES Players(PlayerId),
+	ADD CONSTRAINT FkEventsMatch
+	FOREIGN KEY (MatchId) REFERENCES Matches(MatchId);
+
+ALTER TABLE Players
+	ADD CONSTRAINT FkPlayersTeam
+	FOREIGN KEY (TeamId) REFERENCES Teams(TeamId);
+
+ALTER TABLE Tournaments
+	ADD CONSTRAINT FkTournamentsWinner
+	FOREIGN KEY (WinnerTeamId) REFERENCES Teams(TeamId);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
