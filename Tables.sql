@@ -104,11 +104,73 @@ ALTER TABLE Tournaments
 	ADD CONSTRAINT FkTournamentsWinner
 	FOREIGN KEY (WinnerTeamId) REFERENCES Teams(TeamId);
 
+-- dodatne tablice za M:N	
+
+CREATE TABLE TournamentsTeams(
+	TournamentTeamId SERIAL PRIMARY KEY,
+	TournamentId INT REFERENCES Tournaments(TournamentId),
+	TeamId INT REFERENCES Teams(TeamId),
+	UNIQUE (TournamentId, TeamId),
+	Points INT CHECK(Points>= 0),
+	ScoredGoals INT CHECK (ScoredGoals >= 0),
+	ConcededGoals INT CHECK(ConcededGoals >= 0),
+	ReachedStage VARCHAR(100) CHECK(ReachedStage IN ('grupa','šesnaestina','osmina','četvrtfinale','polufinale','finale')),
+	Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	Updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- dodatni uvjeti
+CREATE OR REPLACE FUNCTION SetUpdateEntity()
+	RETURNS TRIGGER
+AS
+$$
+	BEGIN
+	NEW.Updated_at = CURRENT_TIMESTAMP;
+RETURN NEW;
+	END;
+$$
+language plpgsql;
 
 
+CREATE TRIGGER UpdateTournaments
+	BEFORE UPDATE ON Tournaments
+	FOR EACH ROW
+	EXECUTE FUNCTION SetUpdateEntity();
 
+CREATE TRIGGER UpdateTeams
+	BEFORE UPDATE ON Teams
+	FOR EACH ROW
+	EXECUTE FUNCTION SetUpdateEntity();
 
+CREATE TRIGGER UpdateMatches
+	BEFORE UPDATE ON Matches
+	FOR EACH ROW
+	EXECUTE FUNCTION SetUpdateEntity();
 
+CREATE TRIGGER UpdateReferees
+	BEFORE UPDATE ON Referees
+	FOR EACH ROW
+	EXECUTE FUNCTION SetUpdateEntity();
+
+CREATE TRIGGER UpdateMatchType
+	BEFORE UPDATE ON MatchTypes
+	FOR EACH ROW
+	EXECUTE FUNCTION SetUpdateEntity();
+
+CREATE TRIGGER UpdateEvents
+	BEFORE UPDATE ON Events
+	FOR EACH ROW
+	EXECUTE FUNCTION SetUpdateEntity();
+
+CREATE TRIGGER UpdateTournamentsTeams
+	BEFORE UPDATE ON TournamentsTeams
+	FOR EACH ROW
+	EXECUTE FUNCTION SetUpdateEntity();
+
+CREATE TRIGGER UpdatePlayers
+	BEFORE UPDATE ON Players
+	FOR EACH ROW
+	EXECUTE FUNCTION SetUpdateEntity();
 
 
 
