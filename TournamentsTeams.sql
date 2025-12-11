@@ -49,11 +49,20 @@ UPDATE TournamentsTeams tt
 UPDATE TournamentsTeams tt
 	SET ReachedStage = (ARRAY['grupa','osmina','četvrtfinale','polufinale','finale'])[floor(random()*5)+1];
 	
-SELECT e.eventid, e.playerid, p.teamid, m.hometeamid, m.awayteamid
-FROM events e
-JOIN players p ON p.playerid = e.playerid
-JOIN matches m ON m.matchid = e.matchid
 
+---treba promijenit i events kako bi se izracunali postignuti golovi
 
+INSERT INTO Events (PlayerId, MatchId, EventType, MinutesOfEvent)
+	SELECT
+		(SELECT PlayerId FROM Players WHERE TeamId = m.HomeTeamId ORDER BY random() LIMIT 1),
+		m.MatchId, 'goal', floor(random()*90)+1
+FROM Matches m,
+	generate_series(1,m.HomeScore);
 
+INSERT INTO Events (PlayerId, MatchId, EventType, MinutesOfEvent)
+	SELECT
+		(SELECT PlayerId FROM Players WHERE TeamId = m.AwayTeamId ORDER BY random() LIMIT 1),
+		m.MatchId, 'goal', floor(random()*90)+1
+FROM Matches m,
+	generate_series(1,m.AwayScore);
 
