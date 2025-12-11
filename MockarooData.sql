@@ -3050,7 +3050,7 @@ insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceO
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Golden Gloves', null, 1962, 'Czerwieńsk');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Champion''s Cup', null, 1979, 'Qiziltepa Shahri');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Grand Prix', null, 1962, 'Nuevo Berlín');
-insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Epic Clash', null, 2006, 'Zmeyskaya');
+insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Epic Clash', null, 2026, 'Zmeyskaya');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Summer Slam', 915, 1994, 'Sierra Imataca');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Victory Cup', null, 2014, 'Saint John');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Victory Royale', 747, 1963, 'Bugko');
@@ -3058,7 +3058,7 @@ insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceO
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Master''s Challenge', null, 1994, 'Diaofeng');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Spring Showdown', 592, 2012, 'Daluo');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Winter War', null, 1983, 'Yushu');
-insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Power Play', null, 2019, 'San Sebastian');
+insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Power Play', null, 2026, 'San Sebastian');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Golden Gloves', 482, 1950, 'Porto Ferreira');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Battle Royale', 283, 1966, 'Žabljak');
 insert into Tournaments (TournamentName, WinnerTeamId, YearOfMaintenance, PlaceOfMaintenance) values ('Ultimate Showdown', null, 1986, 'Coronel Belisle');

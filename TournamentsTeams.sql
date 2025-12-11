@@ -9,8 +9,8 @@ UPDATE TournamentsTeams tt
 		SELECT COUNT(*) FROM Events e
 		JOIN Matches m ON m.MatchId = e.MatchId
 		WHERE e.EventType = 'goal'
-		AND (m.TournamentId = tt.TournamentId
-			AND (m.HomeTeamId = tt.TeamId AND e.PlayerId IN 
+		AND m.TournamentId = tt.TournamentId
+		AND ((m.HomeTeamId = tt.TeamId AND e.PlayerId IN 
 			(SELECT PlayerId FROM Players p WHERE p.TeamId = tt.TeamId))
 		OR
 			(m.AwayTeamId = tt.TeamId AND e.PlayerId IN
@@ -23,8 +23,8 @@ UPDATE TournamentsTeams tt
 		SELECT COUNT(*) FROM Events e
 		JOIN Matches m ON m.MatchId = e.MatchId
 		WHERE e.EventType = 'goal'
-		AND (m.TournamentId = tt.TournamentId
-			AND (m.HomeTeamId = tt.TeamId AND e.PlayerId IN 
+		AND m.TournamentId = tt.TournamentId
+			AND ((m.HomeTeamId = tt.TeamId AND e.PlayerId IN 
 			(SELECT PlayerId FROM Players p WHERE p.TeamId <> tt.TeamId))
 		OR
 			(m.AwayTeamId = tt.TeamId AND e.PlayerId IN
@@ -65,4 +65,26 @@ INSERT INTO Events (PlayerId, MatchId, EventType, MinutesOfEvent)
 		m.MatchId, 'goal', floor(random()*90)+1
 FROM Matches m,
 	generate_series(1,m.AwayScore);
+
+-- odlucivanje winnerTeamId
+
+UPDATE Tournaments t
+SET WinnerTeamId = (
+	CASE
+		WHEN t.YearOfMaintenance > EXTRACT(Year FROM CURRENT_DATE) THEN Null
+		ELSE(
+			SELECT tt.TeamId
+			FROM TournamentsTeams tt
+			WHERE t.TournamentId = tt.TournamentId
+			ORDER BY tt.Points DESC 
+			LIMIT 1)
+		END
+);
+
+
+
+
+
+
+
 
