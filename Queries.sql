@@ -54,24 +54,66 @@ WHERE t.TournamentId = 5; --popravi vrijeme utakmice s vremenom turnira
 -- 5. Prikazi sve utakmice određenog tima kroz sve turnire
 -- Izvući sve utakmice u kojima je tim sudjelovao, s rezultatima i fazama natjecanja. 
 
-SELECT MatchId, mt.MatchTypeName, teh.TeamId, tea.TeamId, HomeScore, AwayScore  FROM Matches m
+SELECT MatchId, teh.TeamName, tea.TeamName, HomeScore, AwayScore, tt.ReachedStage 
+	FROM Matches m
 INNER JOIN Teams teh ON m.HomeTeamId = teh.TeamId
 INNER JOIN Teams tea ON m.AwayTeamId = tea.TeamId
-INNER JOIN MatchTypes mt ON m.MatchTypeId = mt.MatchTypeId
-WHERE teh.TeamId = 5 OR tea.TeamId = 5;
+INNER JOIN Tournaments t ON m.TournamentId = t.TournamentId
+INNER JOIN TournamentsTeams tt ON tt.TournamentId = m.TournamentId AND tt.TeamId = 5
+WHERE m.HomeTeamId = 5 OR m.AwayTeamId = 5;
 
+-- 6. Izlistati sve događaje (golovi, kartoni) za određenu utakmicu
+-- Prikazati tip događaja, ime igrača koji ga je ostvario.
 
+SELECT MatchId,
+	EventType,
+	p.PlayerFirstName,
+	p.PlayerLastName
+FROM Events e
+INNER JOIN Players p ON e.PlayerId = p.PlayerId
+WHERE MatchId = 5;
 
+-- 7. Prikazi sve igrace koji su dobili zuti ili crveni karton na cijelom turniru
+-- S navedenim timom, utakmicom i minutom. 
 
+SELECT t.TournamentId,
+	e.MatchId,
+	p.PlayerFirstName,
+	p.PlayerLastName,
+	te.TeamName,
+	e.EventType,
+	e.MinutesOfEvent
+FROM Events e
+INNER JOIN Players p on p.PlayerId = e.PlayerId 
+INNER JOIN Teams te on te.TeamId = p.TeamId
+INNER JOIN Matches m on m.MatchId = e.MatchId
+INNER JOIN Tournaments t ON t.TournamentId = m.TournamentId
+WHERE t.TournamentId = 5 
+	AND e.EventType IN ('yellow card', 'red card');
 
+-- 8. Prikazi sve strijelce turnira
+-- Izvući igrače koji su postigli pogodak, broj golova te tim. 
 
+SELECT p.PlayerFirstName, p.PlayerLastName, COUNT(*), t.TeamName
+FROM Events e
+INNER JOIN Players p ON e.PlayerId = p.PlayerId
+INNER JOIN Teams t ON p.TeamId = t.TeamId 
+INNER JOIN Matches m ON e.MatchId = m.MatchId 
+WHERE e.EventType = 'goal' 
+	AND m.TournamentId = 5
+GROUP BY p.PlayerId, t.TeamName
 
+-- 9. Prikazi tablicu bodova za odredjeni turnir
+-- Za svaki tim izlistati broj osvojenih bodova, gol razliku i plasman. 
 
-
-
-
-
-
-
+SELECT t.TeamName,
+	tt.Points,
+	tt.ScoredGoals,
+    tt.ConcededGoals,
+	tt.ScoredGoals - tt.ConcededGoals,
+	tt.ReachedStage
+FROM TournamentsTeams tt
+INNER JOIN Teams t ON tt.TeamId = t.TeamId
+WHERE tt.TournamentId = 5;
 
 
