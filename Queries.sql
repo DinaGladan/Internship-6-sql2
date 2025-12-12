@@ -202,6 +202,34 @@ INNER JOIN TournamentsTeams tt ON t.TournamentId = tt.TournamentId
 INNER JOIN Players p ON tt.TeamId = p.TeamId
 GROUP BY t.TournamentId, t.TournamentName
 
+-- 17. Najbolji strijelac po timu
+-- Za svaki tim ispiši najboljeg strijelca na svim turnirima gdje je taj tim sudjelovao 
+
+SELECT DISTINCT ON (TeamId)
+    TeamName,
+    PlayerFirstName,
+    PlayerLastName,
+    GoalsScored
+FROM (
+	SELECT t.TeamId,
+		TeamName,
+		PlayerFirstName,
+		PlayerLastName,
+		COUNT(*) AS GoalsScored
+	FROM Events e
+	INNER JOIN Players p ON p.PlayerId = e.PlayerId
+	INNER JOIN Teams t ON p.TeamId = t.TeamId
+	WHERE EventType = 'goal'
+	GROUP BY t.TeamId, t.TeamName, p.PlayerId, p.PlayerFirstName, p.PlayerLastName
+) sub
+ORDER BY TeamId, GoalsScored DESC
+
+
+
+
+
+
+
 
 
 
