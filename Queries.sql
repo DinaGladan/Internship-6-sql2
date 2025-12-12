@@ -138,3 +138,13 @@ JOIN Teams th ON m.HomeTeamId = th.TeamId
 JOIN Teams ta ON m.AwayTeamId = ta.TeamId
 WHERE MatchTypeName = 'final';
 
+-- 11. Prikazi sve vrste utakmica
+-- Npr. grupna faza, četvrtfinale, polufinale, finale – s brojem utakmica te vrste. 
+
+SELECT mt.MatchTypeName, COUNT (*)
+FROM Matches m
+INNER JOIN MatchTypes mt  ON m.MatchTypeId = mt.MatchTypeId 
+GROUP BY mt.MatchTypeId
+
+
+
