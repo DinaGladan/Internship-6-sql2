@@ -224,8 +224,21 @@ FROM (
 ) sub
 ORDER BY TeamId, GoalsScored DESC
 
+-- 18. Utakmice nekog sudca
+-- Za određenog sudca ispiši sve utakmice na kojima je sudio 
 
-
+SELECT r.RefereeFirstName,
+	r.RefereeLastName,
+	MatchId,
+	th.TeamName,
+	ta.TeamName,
+	Date,
+	Time
+FROM Matches m
+INNER JOIN Referees r ON m.RefereeId = r.RefereeId
+INNER JOIN Teams th ON m.HomeTeamId = th.TeamId
+INNER JOIN Teams ta ON m.AwayTeamId = ta.TeamId
+WHERE m.RefereeId = 5;
 
 
 
