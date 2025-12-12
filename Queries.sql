@@ -146,5 +146,15 @@ FROM Matches m
 INNER JOIN MatchTypes mt  ON m.MatchTypeId = mt.MatchTypeId 
 GROUP BY mt.MatchTypeId
 
+-- 12. Prikazi sve utakmice odigrane na odredjeni datum
+-- Prikazati timove, vrstu utakmice i rezultat.
+
+SELECT Date, th.TeamName, ta.TeamName, mt.MatchTypeName, HomeScore, AwayScore
+FROM Matches m
+INNER JOIN Teams th ON m.HomeTeamId = th.TeamId
+INNER JOIN Teams ta ON m.AwayTeamId = ta.TeamId
+INNER JOIN MatchTypes mt ON m.MatchTypeId =mt.MatchTypeId
+WHERE Date = '1968-08-26'
+
 
 

@@ -5551,10 +5551,10 @@ insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamI
 insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (5, 418, 9, 418, 91, '1977-01-29', '16:03', 22, 8);
 insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (4, 419, 22, 419, 745, '2005-01-07', '14:28', 18, 22);
 insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (4, 420, 64, 420, 335, '1968-08-26', '17:54', 20, 7);
-insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (1, 421, 78, 421, 196, '1994-05-12', '9:21', 28, 2);
-insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (1, 422, 74, 422, 439, '2006-08-30', '15:00', 18, 3);
-insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (4, 423, 85, 423, 872, '2020-09-20', '13:36', 10, 2);
-insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (3, 424, 47, 424, 489, '1965-02-24', '12:31', 13, 8);
+insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (1, 421, 78, 421, 196, '1968-08-26', '9:21', 28, 2);
+insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (1, 422, 74, 422, 439, '1968-08-26', '15:00', 18, 3);
+insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (4, 423, 85, 423, 872, '1968-08-26', '13:36', 10, 2);
+insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (3, 424, 47, 424, 489, '1968-08-26', '12:31', 13, 8);
 insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (3, 425, 13, 425, 429, '2009-11-03', '17:08', 25, 25);
 insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (5, 426, 45, 426, 794, '1984-11-01', '8:40', 22, 4);
 insert into Matches (MatchTypeId, RefereeId, TournamentId, HomeTeamId, AwayTeamId, Date, Time, HomeScore, AwayScore) values (4, 427, 51, 427, 791, '1998-04-19', '11:29', 3, 23);
