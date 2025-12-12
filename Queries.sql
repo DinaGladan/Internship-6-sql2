@@ -116,4 +116,25 @@ FROM TournamentsTeams tt
 INNER JOIN Teams t ON tt.TeamId = t.TeamId
 WHERE tt.TournamentId = 5;
 
+-- 10. Prikaži sve finalne utakmice u povijesti
+-- Izvući utakmice čija je faza “finale” i prikazati pobjednika. 
+
+SELECT
+    t.TournamentName,
+    t.YearOfMaintenance,
+    MatchId,
+    th.TeamName AS HomeTeam,
+    ta.TeamName AS AwayTeam,
+    HomeScore,
+    AwayScore,
+    CASE
+        WHEN m.HomeScore > m.AwayScore THEN th.TeamName
+        WHEN m.AwayScore > m.HomeScore THEN ta.TeamName
+        ELSE 'Draw' END
+FROM Matches m
+JOIN MatchTypes mt ON m.MatchTypeId = mt.MatchTypeId
+JOIN Tournaments t ON m.TournamentId = t.TournamentId
+JOIN Teams th ON m.HomeTeamId = th.TeamId
+JOIN Teams ta ON m.AwayTeamId = ta.TeamId
+WHERE MatchTypeName = 'final';
 
