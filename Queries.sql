@@ -170,4 +170,14 @@ WHERE m.TournamentId = 5 AND e.EventType = 'goal'
 GROUP BY m.TournamentId, p.PlayerId
 ORDER BY Goals DESC
 
+-- 14. Prikazi sve turnire na kojima je određeni tim sudjelovao
+-- Za svaki turnir navesti godinu održavanja i ostvareni plasman. 
+
+SELECT t.TournamentName,
+	t.YearOfMaintenance,
+	ReachedStage
+FROM TournamentsTeams tt
+INNER JOIN Tournaments t ON tt.TournamentId = t.TournamentId
+WHERE TeamId = 5;
+
 

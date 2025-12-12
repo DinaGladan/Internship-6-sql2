@@ -82,6 +82,17 @@ SET WinnerTeamId = (
 		END
 );
 
+-- kako bi se ispunio min broj redaka
+INSERT INTO TournamentsTeams (TournamentId,
+	TeamId,
+	Points,
+	ScoredGoals,
+	ConcededGoals,
+	ReachedStage)
+	VALUES
+	(3, 5, 10, 8, 3, 'polufinale'),
+	(7, 5, 7, 5, 4, 'četvrtfinale'),
+	(12, 5, 12, 11, 2, 'finale');
 
 
 
