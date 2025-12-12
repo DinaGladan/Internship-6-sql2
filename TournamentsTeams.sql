@@ -19,6 +19,28 @@ UPDATE TournamentsTeams tt
 );
 
 UPDATE TournamentsTeams tt
+	SET ReachedStage = (ARRAY['grupa','osmina','četvrtfinale','polufinale','finale'])[floor(random()*5)+1];
+	
+
+---treba promijenit i events kako bi se izracunali postignuti golovi
+
+INSERT INTO Events (PlayerId, MatchId, EventType, MinutesOfEvent)
+	SELECT
+		(SELECT PlayerId FROM Players WHERE TeamId = m.HomeTeamId ORDER BY random() LIMIT 1),
+		m.MatchId, 'goal', floor(random()*90)+1
+FROM Matches m,
+	generate_series(1,m.HomeScore);
+
+INSERT INTO Events (PlayerId, MatchId, EventType, MinutesOfEvent)
+	SELECT
+		(SELECT PlayerId FROM Players WHERE TeamId = m.AwayTeamId ORDER BY random() LIMIT 1),
+		m.MatchId, 'goal', floor(random()*90)+1
+FROM Matches m,
+	generate_series(1,m.AwayScore);
+
+--izracun golova naknadno
+
+UPDATE TournamentsTeams tt
 	SET ConcededGoals =(
 		SELECT COUNT(*) FROM Events e
 		JOIN Matches m ON m.MatchId = e.MatchId
@@ -45,27 +67,6 @@ UPDATE TournamentsTeams tt
 	WHERE m.TournamentId = tt.TournamentId
 	AND (m.HomeTeamId = tt.TeamId OR m.AwayTeamId = tt.TeamId)
 );
-
-UPDATE TournamentsTeams tt
-	SET ReachedStage = (ARRAY['grupa','osmina','četvrtfinale','polufinale','finale'])[floor(random()*5)+1];
-	
-
----treba promijenit i events kako bi se izracunali postignuti golovi
-
-INSERT INTO Events (PlayerId, MatchId, EventType, MinutesOfEvent)
-	SELECT
-		(SELECT PlayerId FROM Players WHERE TeamId = m.HomeTeamId ORDER BY random() LIMIT 1),
-		m.MatchId, 'goal', floor(random()*90)+1
-FROM Matches m,
-	generate_series(1,m.HomeScore);
-
-INSERT INTO Events (PlayerId, MatchId, EventType, MinutesOfEvent)
-	SELECT
-		(SELECT PlayerId FROM Players WHERE TeamId = m.AwayTeamId ORDER BY random() LIMIT 1),
-		m.MatchId, 'goal', floor(random()*90)+1
-FROM Matches m,
-	generate_series(1,m.AwayScore);
-
 -- odlucivanje winnerTeamId
 
 UPDATE Tournaments t
