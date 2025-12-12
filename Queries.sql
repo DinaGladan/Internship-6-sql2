@@ -156,5 +156,18 @@ INNER JOIN Teams ta ON m.AwayTeamId = ta.TeamId
 INNER JOIN MatchTypes mt ON m.MatchTypeId =mt.MatchTypeId
 WHERE Date = '1968-08-26'
 
+-- 13. Prikazi igrace koji su postigli najvise golova na odredjenom turniru
+-- Sortirati po broju golova silazno. 
+
+SELECT m.TournamentId,
+	p.PlayerFirstName,
+	p.PlayerLastName,
+	COUNT(*) AS Goals
+FROM Events e
+INNER JOIN Players p ON e.PlayerId = p.PlayerId
+INNER JOIN Matches m ON e.MatchId = m.MatchId
+WHERE m.TournamentId = 5 AND e.EventType = 'goal'
+GROUP BY m.TournamentId, p.PlayerId
+ORDER BY Goals DESC
 
 
