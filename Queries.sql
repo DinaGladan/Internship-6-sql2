@@ -191,6 +191,20 @@ ORDER BY Points DESC,
 	(ScoredGoals - ConcededGoals) DESC
 LIMIT 1
 
+-- 16. Za svaki turnir ispiši broj timova i igrača
+
+SELECT t.TournamentId,
+	t.TournamentName,
+	COUNT(DISTINCT tt.TeamId),
+	COUNT(DISTINCT p.PlayerId) 
+FROM Tournaments t
+INNER JOIN TournamentsTeams tt ON t.TournamentId = tt.TournamentId
+INNER JOIN Players p ON tt.TeamId = p.TeamId
+GROUP BY t.TournamentId, t.TournamentName
+
+
+
+
 
 
 
