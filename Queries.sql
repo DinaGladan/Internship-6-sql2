@@ -180,4 +180,19 @@ FROM TournamentsTeams tt
 INNER JOIN Tournaments t ON tt.TournamentId = t.TournamentId
 WHERE TeamId = 5;
 
+-- 15. Pronadji pobjednika turnira na temelju odigranih utakmica
+-- Izvući tim s najviše bodova ili pobjednika finala, ovisno o strukturi turnira. 
+
+SELECT t.TeamId, t.TeamName, Points
+FROM TournamentsTeams tt
+INNER JOIN Teams t ON tt.TeamId = t.TeamId
+WHERE TournamentId = 5
+ORDER BY Points DESC, 
+	(ScoredGoals - ConcededGoals) DESC
+LIMIT 1
+
+
+
+
+
 
