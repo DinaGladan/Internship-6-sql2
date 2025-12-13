@@ -49,7 +49,7 @@ INNER JOIN Tournaments t ON m.TournamentId = t.TournamentId
 INNER JOIN Teams teh ON m.HomeTeamId = teh.TeamId
 INNER JOIN Teams tea ON m.AwayTeamId = tea.TeamId
 INNER JOIN MatchTypes mt ON m.MatchTypeId = mt.MatchTypeId
-WHERE t.TournamentId = 5; --popravi vrijeme utakmice s vremenom turnira
+WHERE t.TournamentId = 5;
 
 -- 5. Prikazi sve utakmice određenog tima kroz sve turnire
 -- Izvući sve utakmice u kojima je tim sudjelovao, s rezultatima i fazama natjecanja. 

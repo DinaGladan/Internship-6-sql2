@@ -94,8 +94,16 @@ INSERT INTO TournamentsTeams (TournamentId,
 	(7, 5, 7, 5, 4, 'četvrtfinale'),
 	(12, 5, 12, 11, 2, 'finale');
 
+-- spajanje datuma utakmice s turnirom
 
-
+UPDATE Matches m 
+SET Date = make_date(
+	t.YearOfMaintenance,
+	floor(RANDOM()*12 + 1)::INT,
+	floor(RANDOM()*28 +1)::INT
+)
+FROM Tournaments t
+WHERE (m.TournamentId = t.TournamentId);
 
 
 
