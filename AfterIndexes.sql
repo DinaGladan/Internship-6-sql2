@@ -142,6 +142,7 @@ FROM TournamentsTeams tt
 INNER JOIN Teams t ON tt.TeamId = t.TeamId
 WHERE tt.TournamentId = 5;
 -- Vrsta pretrazivanja: Seq Scan za Teams i index za TournamentsTeams
+-- Cost od indexa za TournamentsTeams 0.00..4.37 
 --ExecutionTime : 0.280ms
 
 -- 10. Upit
@@ -167,6 +168,7 @@ JOIN Teams th ON m.HomeTeamId = th.TeamId
 JOIN Teams ta ON m.AwayTeamId = ta.TeamId
 WHERE MatchTypeName = 'final';
 -- Vrsta pretrazivanja: Seq Scan
+-- Cost za MatchTypes: 0.00..13.75
 --ExecutionTime : 1.623ms
 --index ne pomaze svejedno koristi seq scan
 
@@ -205,6 +207,7 @@ WHERE m.TournamentId = 5 AND e.EventType = 'goal'
 GROUP BY m.TournamentId, p.PlayerId
 ORDER BY Goals DESC
 -- Vrsta pretrazivanja: Bitmap Index Scan on idx_tournament_id i Index Scan using idx_match_id on events e  
+-- Cost za idx_tournament_id = 0.00..4.32, a za idx_match_id = 0.29..77.00
 -- ExecutionTime : 0.880 ms
 -- EventType nema velik utjecaj
 	
@@ -219,6 +222,7 @@ FROM TournamentsTeams tt
 INNER JOIN Tournaments t ON tt.TournamentId = t.TournamentId
 WHERE TeamId = 5;
 -- Vrsta pretrazivanja: Bitmap Index Scan on idx_tournament_team_id
+-- Cost: 0.00..4.32
 --ExecutionTime : 0.303ms
 
 -- 15. Upit
@@ -265,6 +269,7 @@ FROM (
 ) sub
 ORDER BY TeamId, GoalsScored DESC
 -- Vrsta pretrazivanja: Seq Scan
+--Cost na events: 0.00..67.85
 --ExecutionTime : 56.667
 -- ne koristi index na eventtype
 	
