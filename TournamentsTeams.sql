@@ -99,12 +99,10 @@ INSERT INTO TournamentsTeams (TournamentId,
 UPDATE Matches m 
 SET Date = make_date(
 	t.YearOfMaintenance,
-	floor(RANDOM()*12 + 1)::INT,
-	floor(RANDOM()*28 +1)::INT
+	8,
+	26
 )
 FROM Tournaments t
 WHERE (m.TournamentId = t.TournamentId);
-
-
 
 

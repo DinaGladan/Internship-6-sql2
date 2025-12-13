@@ -32,7 +32,7 @@ SELECT PlayerId,
 FROM Players p
 INNER JOIN Teams t
 ON p.TeamId = t.TeamId
-WHERE t.TeamId = 5
+WHERE t.TeamId = 5 --svaki tim ima po 3 igraca inace
 
 -- 4. Prikazi sve utakmice odredjenog turnira
 -- Prikazati datume, vrijeme, timove koji igraju, vrstu utakmice i rezultat. 
@@ -61,6 +61,8 @@ INNER JOIN Teams tea ON m.AwayTeamId = tea.TeamId
 INNER JOIN Tournaments t ON m.TournamentId = t.TournamentId
 INNER JOIN TournamentsTeams tt ON tt.TournamentId = m.TournamentId AND tt.TeamId = 5
 WHERE m.HomeTeamId = 5 OR m.AwayTeamId = 5;
+
+
 
 -- 6. Izlistati sve događaje (golovi, kartoni) za određenu utakmicu
 -- Prikazati tip događaja, ime igrača koji ga je ostvario.
